@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 
-export default function TaskModal({ day, monthIndex, hour, closeModal }) {
+export default function TaskModal({ day, monthIndex, year, hour, closeModal }) {
   const [task, setTask] = useState("");
 
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || {};
-    const taskKey = `${monthIndex}-${day}-${hour}`;
+    const taskKey = `${year}-${monthIndex}-${day}-${hour}`;
     if (savedTasks[taskKey]) {
       setTask(savedTasks[taskKey]);
     }
-  }, [day, monthIndex, hour]);
+  }, [day, monthIndex, year, hour]);
 
   const handleTaskChange = (e) => {
     const newTask = e.target.value;
     setTask(newTask);
 
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || {};
-    const taskKey = `${monthIndex}-${day}-${hour}`;
+    const taskKey = `${year}-${monthIndex}-${day}-${hour}`;
     savedTasks[taskKey] = newTask;
     localStorage.setItem("tasks", JSON.stringify(savedTasks));
   };
@@ -28,7 +28,7 @@ export default function TaskModal({ day, monthIndex, hour, closeModal }) {
           &times;
         </span>
         <h2>
-          Завдання для {day} {monthIndex + 1}, {hour}:00
+          Завдання для {day} {monthIndex + 1}, {year}, {hour}:00
         </h2>
         <textarea
           rows="4"

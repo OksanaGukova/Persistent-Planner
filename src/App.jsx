@@ -1,21 +1,12 @@
 
-import { useState } from "react";
-import Calendar from "./components/Calendar/Calendar";
+import Year from "./components/Year/Year";
 
-
-
-const App = () => {
-  const [selectedMonth, setSelectedMonth] = useState(null);
-
+function App() {
   return (
     <div className="App">
-      <Calendar
-        selectedMonth={selectedMonth}
-        setSelectedMonth={setSelectedMonth}
-      />
+      <Year />
     </div>
   );
-};
-
+}
 
 export default App;

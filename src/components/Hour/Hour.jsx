@@ -1,8 +1,8 @@
 
-export default function Hour({ day, monthIndex, hour, openModal }) {
-  return (
-    <div className="hour" onClick={() => openModal(hour, day, monthIndex)}>
-      <label>{hour}:00</label>
-    </div>
-  );
+export default function Hour({ hour, openModal }) {
+ return (
+   <div className="hour" onClick={() => openModal(hour)}>
+     <label>{hour}:00</label>
+   </div>
+ );
 }
