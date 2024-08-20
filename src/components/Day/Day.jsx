@@ -2,7 +2,7 @@
 import { useState } from "react";
 import TaskModal from "../TaskModal/TaskModal";
 import Hour from "../Hour/Hour";
-
+import css from './Day.module.css'
 
 const hoursInDay = 24;
 
@@ -22,7 +22,7 @@ export default function Day({ day, monthIndex, year }) {
   };
 
   return (
-    <div className="day">
+    <div className={css.dayCell}>
       <div className="day-header" onClick={() => setShowHours(!showHours)}>
         <h3>{day}</h3>
       </div>

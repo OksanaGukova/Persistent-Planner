@@ -1,0 +1,24 @@
+.dayCell {
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(farthest-corner, #fff 95%, #fff);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 10px; /* add margin to increase distance between cells */
+   font-size: 24px;
+  font-weight: bold;
+}
+
+.dayCell:hover {
+background-color: #f0f0f0;
+  box-shadow: 0 0 0 3px #87ceeb;
+}
+
+.dayCell span {
+  font-size: 24px;
+  font-weight: bold;
+}
