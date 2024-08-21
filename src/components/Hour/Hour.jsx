@@ -1,8 +1,11 @@
+import React from 'react';
 
-export default function Hour({ hour, openModal }) {
- return (
-   <div className="hour" onClick={() => openModal(hour)}>
-     <label>{hour}:00</label>
-   </div>
- );
-}
+const Hour = ({ hour, onClick }) => {
+  return (
+    <div className="hour" onClick={onClick}>
+      {hour}:00
+    </div>
+  );
+};
+
+export default Hour;

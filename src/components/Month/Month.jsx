@@ -1,7 +1,7 @@
 import Day from "../Day/Day";
-import PropTypes from "prop-types";
-import css from './Month.module.css'
+import css from "./Month.module.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const daysInMonth = (monthIndex, year) => {
   if (
@@ -24,11 +24,13 @@ const daysInMonth = (monthIndex, year) => {
 
 const Month = ({ month, monthIndex, year }) => {
   const [selectedDay, setSelectedDay] = useState(null);
+  const navigate = useNavigate(); // Хук для навігації
 
   const numDays = daysInMonth(monthIndex, year);
 
   const handleDayClick = (day) => {
     setSelectedDay(day);
+    navigate(`/tasks?day=${day}&month=${monthIndex + 1}&year=${year}`); // Перенаправлення на сторінку
   };
 
   return (
@@ -59,4 +61,4 @@ const Month = ({ month, monthIndex, year }) => {
   );
 };
 
-export default Month
+export default Month;

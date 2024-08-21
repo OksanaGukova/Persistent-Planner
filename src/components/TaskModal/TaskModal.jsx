@@ -1,42 +1,36 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-export default function TaskModal({ day, monthIndex, year, hour, closeModal }) {
+const TaskModal = ({ day, monthIndex, year, hour, closeModal }) => {
+  console.log("Rendering TaskModal for hour", hour);
   const [task, setTask] = useState("");
 
-  useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || {};
-    const taskKey = `${year}-${monthIndex}-${day}-${hour}`;
-    if (savedTasks[taskKey]) {
-      setTask(savedTasks[taskKey]);
-    }
-  }, [day, monthIndex, year, hour]);
-
   const handleTaskChange = (e) => {
-    const newTask = e.target.value;
-    setTask(newTask);
+    setTask(e.target.value);
+  };
 
-    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || {};
-    const taskKey = `${year}-${monthIndex}-${day}-${hour}`;
-    savedTasks[taskKey] = newTask;
-    localStorage.setItem("tasks", JSON.stringify(savedTasks));
+  const handleSaveTask = () => {
+    // Save task to local storage
+    const tasks = localStorage.getItem("tasks") || "{}";
+    const tasksObj = JSON.parse(tasks);
+    const dateKey = `${year}-${monthIndex + 1}-${day}`;
+    if (!tasksObj[dateKey]) {
+      tasksObj[dateKey] = {};
+    }
+    tasksObj[dateKey][hour] = task;
+    localStorage.setItem("tasks", JSON.stringify(tasksObj));
+    closeModal();
   };
 
   return (
-    <div className="task-modal">
-      <div className="task-modal-content">
-        <span className="close" onClick={closeModal}>
-          &times;
-        </span>
-        <h2>
-          Завдання для {day} {monthIndex + 1}, {year}, {hour}:00
-        </h2>
-        <textarea
-          rows="4"
-          value={task}
-          onChange={handleTaskChange}
-          placeholder="Завдання..."
-        ></textarea>
-      </div>
+    <div className="modal">
+      <h2>
+        Enter task for {hour}:00 on {day}/{monthIndex + 1}/{year}
+      </h2>
+      <textarea value={task} onChange={handleTaskChange} />
+      <button onClick={handleSaveTask}>Save Task</button>
+      <button onClick={closeModal}>Cancel</button>
     </div>
   );
-}
+};
+
+export default TaskModal;

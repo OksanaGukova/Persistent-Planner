@@ -7,12 +7,15 @@ import { Layout } from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { refreshUser } from "./redux/auth/operations";
+import Day from "./components/Day/Day";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
   import("./pages/RegistrationPage/RegistrationPage")
 );
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const UsersPage = lazy(() => import("./pages/UsersPage/UsersPage"));
+const TasksForDayPage = lazy(() => import("./pages/TasksForDayPage/TasksForDayPage"));
 const TasksPage = lazy(() => import("./pages/TasksPage/TasksPage"));
 
 export const App = () => {
@@ -47,7 +50,13 @@ const isRefreshing = useSelector(selectIsRefreshing);
         <Route
           path="/tasks"
           element={
-            <PrivateRoute redirectTo="/login" component={<TasksPage />} />
+            <PrivateRoute redirectTo="/login" component={<UsersPage />} />
+          }
+        />
+        <Route
+          path="/tasks/day"
+          element={
+            <PrivateRoute redirectTo="/login" component={<TasksForDayPage />} />
           }
         />
       </Routes>
